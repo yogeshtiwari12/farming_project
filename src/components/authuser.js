@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from "react";
 export const AuthContext = createContext();
 export default function AuthProvider({ children }) {
 
-  const initialAuthUser = localStorage.getItem("User");
+  const initialAuthUser = localStorage.getItem("Token");
 
   const [authUser, setAuthUser] = useState(
 

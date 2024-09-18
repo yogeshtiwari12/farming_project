@@ -23,8 +23,8 @@ const onSubmit= async(e) => {
 e.preventDefault();
 
 try {
-  
-  const response = await axios.post('https://farming-project-backend.onrender.com/useroutes/signup',{
+  // https://farming-project-backend.onrender.com/useroutes/signup
+  const response = await axios.post('http://localhost:3000/useroutes/signup',{
 
   name,
   address,
@@ -33,13 +33,14 @@ try {
   
   })
 
-  if(response.status === 201) {
+  if(response.status === 201 && response.data.token) {
     // toast.success("Signup success")
     setAuthUser(response.data); // ye smj ni aaya kyu kiya
         navigate('/'); 
-        toast.success("Login successful");
+        toast.success("Signup successful");
   }
-  localStorage.getItem("USer : "+JSON.stringify(response.data));
+  localStorage.getItem("Token : "+JSON.stringify(response.data.token));
+  setAuthUser(response.data);
  
 } catch (error) {
   toast.error("Signup failed",error);

@@ -8,6 +8,7 @@ function Chatbot() {
   const [crop, setCrop] = useState('');
 
   const [response, setResponse] = useState('');
+  const [loading, setloading] = useState(false);
 
   const genAI = new GoogleGenerativeAI("AIzaSyClhzfVxVJkGhYgpLTK6C_g4pMsct9RnMc"); // Replace with your actual API key
 
@@ -21,11 +22,13 @@ function Chatbot() {
 - Potassium Content: ${potassium} kg/ha
 
 Provide an analysis of the expected yield and any recommendations for optimizing the nutrient levels.`;
-
+setloading(true)
       const result = await model.generateContent(prompt);
       const response = result.response;
       const text = await response.text();
+      
       setResponse(text);
+      setloading(false)
     } catch (error) {
       console.error("Error generating content:", error);
     }
@@ -38,6 +41,8 @@ Provide an analysis of the expected yield and any recommendations for optimizing
 
   return (
     <>
+
+    {loading&&<span className="loading loading-spinner text-success"></span>}
       <div className="flex justify-center items-center mt-20">
         <div className="form-container w-[370px] h-[450px] p-2 rounded-lg border flex flex-col items-center">
           <h2 className=" mb-6 mt-3 font-md">Crop Suggestion based on Nutrient Levels:</h2>
@@ -158,7 +163,7 @@ Provide an analysis of the expected yield and any recommendations for optimizing
 <option>Methi</option>
 <option>Parsley</option>
 <option>Mint</option>
-<option>Coriander</option> // its a family of flowering plant 
+<option>Coriander</option> 
 <option>Sweet Corn</option>
 <option>Sorghum</option>
 <option>Millets</option>

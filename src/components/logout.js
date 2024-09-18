@@ -2,32 +2,42 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../components/authuser';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 function Logout() {
-  const [authuser, setautheruser] = useAuth();
+  const [authUser, setAuthUser] = useAuth();
   const navigate = useNavigate();
 
-  function handlelogout() {
+  async function handleLogout() {
     try {
-      setautheruser({
-        ...authuser,
-        user: null
+      const token = authUser
+      // console.log('Token:', token.token);
+
+     const response =  await axios.post('http://localhost:3000/useroutes/logout', {}, {
+        headers: {
+          authorization: `${token.token}`
+        }
       });
-      localStorage.removeItem("User");
-      toast.success("Logout Successfully");
+      
+console.log('Api Response:', response.data)
+      setAuthUser(null);
+      localStorage.removeItem('Token');
+      toast.success('Logout Successful');
 
       setTimeout(() => {
-        navigate('/login'); // Redirect to the login page
+        navigate('/'); // Redirect to the login page or home page
       }, 2000);
     } catch (error) {
-      toast.error("Error" + error.message);
-      setTimeout(() => {}, 3000);
+      toast.error(`Error: ${error.message}`);
+      console.error('Logout failed', error.response ? error.response.data : error.message);
     }
   }
 
   return (
-    <div className="px-4 py-2 bg-red-500 text-white rounded-xl">
-      <button onClick={handlelogout}>Logout</button>
+    <div className="px-2 pb-2 bg-red-500 text-white rounded-md">
+      <button onClick={handleLogout} className="text-md">
+        Logout
+      </button>
     </div>
   );
 }

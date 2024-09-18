@@ -3,7 +3,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../components/authuser'; // Adjust the import path based on your project structure
-
+  
 function Login() {
   const navigate = useNavigate();
   const [, setAuthUser] = useAuth(); // Get the authentication state setter
@@ -14,13 +14,14 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://farming-project-backend.onrender.com/useroutes/login', {
+      const response = await axios.post('http://localhost:3000/useroutes/login', {
         name,
         password
       });
 
-      if (response.data) {
-        localStorage.setItem("User", JSON.stringify(response.data));
+      if (response.data && response.data.token) {
+        // localStorage.setItem("User", JSON.stringify(response.data));
+        localStorage.setItem("Token ", JSON.stringify(response.data.token));
         setAuthUser(response.data); // ye smj ni aaya kyu kiya
         navigate('/'); 
         toast.success("Login successful");
