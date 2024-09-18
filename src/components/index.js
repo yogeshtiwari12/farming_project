@@ -6,10 +6,11 @@ import fertilizerlogoo from './images/fertilizerlogoo.jpg';
 import pesticideslogoo from './images/pesticideslogoo.png';
 import loginlogoo from './images/loginlogoo.jpg';
 import { Link } from 'react-router-dom';
-import image from './images/backg.jpg';
+
 import Logout from '../components/logout';
+import kisanpic2 from './images/kisanpic2.jpg';
 import { useAuth } from '../components/authuser';
-// import Login from '../components/login';
+import field from '../components/images/field.jpg';
 
 
 function Index() {
@@ -24,8 +25,15 @@ function Index() {
   }, []);
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col" style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover' }}>
-      <nav className="bg-green-700 text-white text-center font-bold text-4xl p-6 hover:bg-green-800 transition duration-300 shadow-lg">
+<div
+  className="bg-gray-100 min-h-screen flex flex-col"
+  style={{
+    backgroundImage: `url(${field})`,
+    backgroundSize: 'cover', 
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat', 
+  }}
+>      <nav className="bg-green-700 text-white text-center font-bold text-4xl p-6 hover:bg-green-800 transition duration-300 shadow-lg">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="mb-4 md:mb-0">
             <h2 className="text-center mx-10 md:text-left">Seeds & Soil</h2>
@@ -94,7 +102,7 @@ function Index() {
 
         <div className="p-5 m-5 text-center transform transition-transform duration-300 hover:scale-105">
           <Link to="/kisan" className="flex flex-col items-center no-underline">
-            <img src={loginlogoo} alt="Login/Sign up" className="w-20 h-20 md:w-28 md:h-28 rounded-full mb-2 border-4 border-green-700 p-1 shadow-md" />
+            <img src={kisanpic2} alt="Login/Sign up" className="w-20 h-20 md:w-28 md:h-28 rounded-full mb-2 border-4 border-green-700 p-1 shadow-md" />
             <h3 className="text-sm md:text-lg font-semibold text-white">Kisan help</h3>
           </Link>
         </div>
