@@ -8,7 +8,7 @@ import loginlogoo from './images/loginlogoo.jpg';
 import { Link } from 'react-router-dom';
 
 import Logout from '../components/logout';
-import kisanpic2 from './images/kisanpic2.jpg';
+import kisanpic2 from '../components/images/kisanpic2.jpg';
 import { useAuth } from '../components/authuser';
 import field from '../components/images/field.jpg';
 
