@@ -1,31 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/authuser';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
 function Logout() {
-  const [authUser, setAuthUser] = useAuth();
   const navigate = useNavigate();
 
   async function handleLogout() {
     try {
-      const token = authUser
-      // console.log('Token:', token.token);
-
-     const response =  await axios.post('http://localhost:3000/useroutes/logout', {}, {
-        headers: {
-          authorization: `${token.token}`
-        }
+    
+     const response =  await axios.post('http://localhost:4000/useroutes/logout', {}, {
+      withCredentials: true, 
       });
       
-console.log('Api Response:', response.data)
-      setAuthUser(null);
-      localStorage.removeItem('Token');
-      toast.success('Logout Successful');
+   if(response.status){
+     toast.success('Logout successful');
+     window.location.reload();
+
+   }
 
       setTimeout(() => {
-        navigate('/'); // Redirect to the login page or home page
+        navigate('/'); 
       }, 2000);
     } catch (error) {
       toast.error(`Error: ${error.message}`);

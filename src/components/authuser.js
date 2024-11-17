@@ -1,13 +1,15 @@
 import React, { createContext, useContext, useState } from "react";
+import cookie from 'js-cookie'
 
 export const AuthContext = createContext();
 export default function AuthProvider({ children }) {
 
-  const initialAuthUser = localStorage.getItem("Token");
+  const token = cookie.get('token')
+  // console.log(token)
 
   const [authUser, setAuthUser] = useState(
 
-    initialAuthUser ? JSON.parse(initialAuthUser) : undefined
+    token ? (token) : undefined
     
   );
   return (

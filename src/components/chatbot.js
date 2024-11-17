@@ -10,30 +10,45 @@ function Chatbot() {
   const [response, setResponse] = useState('');
   const [loading, setloading] = useState(false);
 
-  const genAI = new GoogleGenerativeAI("AIzaSyClhzfVxVJkGhYgpLTK6C_g4pMsct9RnMc"); // Replace with your actual API key
+  const genAI = new GoogleGenerativeAI("AIzaSyCOhxHOkcUgq3XpUT_-ayWwNXrw1OzzLLQ"); // Replace with your actual API key
 
-  async function run(phosphorus, nitrogen, potassium, crop) {
+  async function run() {
     try {
+      setloading(true);
+      const prompt = `Based on the following soil nutrient data, provide a concise crop suggestion and analysis:
+        - Crop Name: ${crop}
+        - Soil Nitrogen Content: ${nitrogen} kg/ha
+        - Soil Phosphorus Content: ${phosphorus} kg/ha
+        - Soil Potassium Content: ${potassium} kg/ha
+        
+        Your response should:
+        1. Analyze the soil's current nutrient levels and their suitability for ${crop}.
+        2. Estimate the expected yield potential based on the provided nutrient data.
+        3. Provide specific recommendations for optimizing soil nutrients, including precise fertilizer or amendment requirements.
+        4. Suggest best practices for improving crop growth under the given conditions.
+        5. Highlight potential risks or challenges due to these nutrient levels and strategies to address them.
+        
+        Please ensure the response is practical and concise, limited to 20-30 lines for easy understanding and implementation.`;
+  
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const prompt = `give us the crop suggestion in 5 points based on following data :
-- Crop Name: ${crop}
-- Nitrogen Content: ${nitrogen} kg/ha
-- Phosphorus Content: ${phosphorus} kg/ha
-- Potassium Content: ${potassium} kg/ha
-
-Provide an analysis of the expected yield and any recommendations for optimizing the nutrient levels.`;
-setloading(true)
       const result = await model.generateContent(prompt);
-      const response = result.response;
-      const text = await response.text();
-      
-      setResponse(text);
-      setloading(false)
+      const responseText = result.response.text();
+  
+      setResponse(responseText);
     } catch (error) {
       console.error("Error generating content:", error);
+      if (error.message.includes("The model is overloaded")) {
+        setResponse(
+          "The AI model is currently overloaded. Please try again after a few moments."
+        );
+      } else {
+        setResponse("An unexpected error occurred. Please try again later.");
+      }
+    } finally {
+      setloading(false);
     }
   }
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     run(phosphorus, nitrogen, potassium, crop);
