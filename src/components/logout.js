@@ -9,7 +9,7 @@ function Logout() {
   async function handleLogout() {
     try {
     
-     const response =  await axios.post('http://localhost:4000/useroutes/logout', {}, {
+     const response =  await axios.post('https://farming-backend-2ccy.onrender.com/useroutes/logout', {}, {
       withCredentials: true, 
       });
       
