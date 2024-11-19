@@ -24,14 +24,14 @@ e.preventDefault();
 
 try {
   // https://farming-project-backend.onrender.com/useroutes/signup
-  const response = await axios.post('https://farming-backend-2ccy.onrender.com/useroutes/signup',{
+  const response = await axios.put('https://farming-backend-2ccy.onrender.com/useroutes/signup',{
 
   name,
   address,
   contact_number,
   password,
   
-  })
+  },,{withCredentials: true})
 
   if(response.status === 201 && response.data.token) {
     // toast.success("Signup success")
