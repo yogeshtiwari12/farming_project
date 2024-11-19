@@ -10,7 +10,7 @@ export default function AuthProvider({ children }) {
     const fetchProfile = async () => {
       try {
         // const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000'; // Use environment variable for the API base URL
-        const response = await axios.get('http://localhost:4000/useroutes/profile', {
+        const response = await axios.get('https://farming-backend-2ccy.onrender.com/useroutes/profile', {
           withCredentials: true,
         });
         setProfile(response.data); // Set the profile data
