@@ -15,7 +15,7 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const response = await axios.put('http://localhost:4000/useroutes/signup', {
+      const response = await axios.put('https://farming-backend-2ccy.onrender.com/useroutes/signup', {
         name,
         address,
         contact_number: contactNumber,
