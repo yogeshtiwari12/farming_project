@@ -19,7 +19,7 @@ function Login() {
       );
 
       if (response.status === 200) {
-        toast.success("Login successful");
+        toast.success(response.data.message);
         navigate('/'); 
        window.location.reload();
       }

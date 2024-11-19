@@ -10,10 +10,13 @@ import Signup from './signup'
 import Login from './components/login'
 import { Toaster } from 'react-hot-toast'
 import Chatbot from './components/chatbot'
+
 import { useAuth } from './components/authuser'
+// import { profile } from 'console'
+
 
 function App() {
-  const [authUser] = useAuth()
+  const [profile] = useAuth()
   return (
     <div>
       <Router>
@@ -21,13 +24,13 @@ function App() {
           <Route path="/" element={<Index/>} />
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/index" element={<Index/>} />
-          <Route path="/seeds" element={authUser?<Seeds/>:<Navigate to={"/login"} />} />
-          <Route path="/irrigation" element={authUser?<IrrigationTools/>:<Navigate to={"/login"}/>} />
-          <Route path="/fertilizer" element={authUser?<Fertilizer/>:<Navigate to={"/login"} />} />
-          <Route path="/pesticide" element={authUser?<Pesticides/>:<Navigate to={"/login"}/>} />
+          <Route path="/seeds" element={profile?<Seeds/>:<Navigate to={"/login"} />} />
+          <Route path="/irrigation" element={profile?<IrrigationTools/>:<Navigate to={"/login"}/>} />
+          <Route path="/fertilizer" element={profile?<Fertilizer/>:<Navigate to={"/login"} />} />
+          <Route path="/pesticide" element={profile?<Pesticides/>:<Navigate to={"/login"}/>} />
           <Route path="/loginsignup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
-          <Route path="/kisan" element={authUser?<Chatbot/>:<Navigate to={"/login"}/>} />
+          <Route path="/kisan" element={profile?<Chatbot/>:<Navigate to={"/login"}/>} />
 
         </Routes>
         <Toaster/>
