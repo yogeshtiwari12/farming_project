@@ -15,15 +15,18 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const response = await axios.put('https://farming-backend-2ccy.onrender.com/useroutes/signup', {
-        name,
-        address,
-        contact_number: contactNumber,
-        password,
-      });
+      const response = await axios.post(
+        'https://farming-project-backend.onrender.com/useroutes/signup',
+        {
+          name,
+          address,
+          contact_number: contactNumber,
+          password,
+        }
+      );
 
-      if (response.status) {
-        toast.success(response.data.message);
+      if (response.status === 201) {
+        toast.success('Signup successful!');
         navigate('/');
       } else {
         toast.error('Something went wrong. Please try again.');
