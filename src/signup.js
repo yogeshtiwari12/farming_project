@@ -31,7 +31,7 @@ try {
   contact_number,
   password,
   
-  },,{withCredentials: true})
+  })
 
   if(response.status === 201 && response.data.token) {
     // toast.success("Signup success")
