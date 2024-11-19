@@ -23,9 +23,7 @@ export default function AuthProvider({ children }) {
     fetchProfile();
   }, []); // Run only once on component mount
 
-  useEffect(() => {
-    console.log("Profile updated:", profile); // Log whenever profile changes
-  }, [profile]);
+
 
   return (
     <AuthContext.Provider value={[profile, setProfile]}>
